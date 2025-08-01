@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-// SVG ICONS
+// Sidebar SVGs (basic, no extra text)
 const HomeIcon = ({ active }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
     <path
@@ -70,20 +70,10 @@ const LibraryIcon = ({ active }) => (
   </svg>
 );
 
-const PlayIconOverlay = () => (
-  <div className="play-overlay">
-    <svg width="40" height="40" viewBox="0 0 40 40">
-      <circle cx="20" cy="20" r="20" fill="#1DB954" />
-      <polygon points="16,13 29,20 16,27" fill="white" />
-    </svg>
-  </div>
-);
-
 const Sidebar = () => (
   <aside className="sidebar">
     <div className="sidebar__top">
       <div className="sidebar__logo">
-        {/* Spotify Logo SVG */}
         <svg height="40" width="135" viewBox="0 0 135 40" fill="none">
           <text
             x="0"
@@ -122,17 +112,7 @@ const Sidebar = () => (
           </li>
         </ul>
       </nav>
-      <div className="sidebar__playlists">
-        <h3 className="sidebar__sectiontitle">PLAYLISTS</h3>
-        <ul className="playlistlist">
-          <li>Chill Hits</li>
-          <li>Coding Mode</li>
-          <li>Lo-fi Beats</li>
-          <li>Top EDM 2023</li>
-          <li>Classical Relax</li>
-          <li>Jazz Evenings</li>
-        </ul>
-      </div>
+      {/* Remove all explicit playlist items: keep section stub ONLY if directly visible */}
     </div>
     <div className="sidebar__bottom">
       <button className="install-btn">Install App</button>
@@ -144,96 +124,44 @@ const Sidebar = () => (
   </aside>
 );
 
-const mockFocusCards = [
-  {
-    title: "Mood Booster",
-    desc: "Get happy with bright, energetic tunes.",
-    img: "https://misc.scdn.co/liked-songs/liked-songs-64.png",
-  },
-  {
-    title: "Peaceful Piano",
-    desc: "Relax with soft classical piano pieces.",
-    img: "https://i.scdn.co/image/ab67706c0000da84a1a12e814e45e22bcc74c888",
-  },
-  {
-    title: "Feel Good Indie",
-    desc: "Uplifting indie to power your day.",
-    img: "https://i.scdn.co/image/ab67706c0000da84c8ba7b2f40cfac3cc6effb98",
-  },
-  {
-    title: "90s Hits",
-    desc: "Throwback to the best of the 90s.",
-    img: "https://i.scdn.co/image/ab67706c0000da84769c5255f34d1f0dbb6bff80",
-  },
-  {
-    title: "Rock Classics",
-    desc: "Iconic tracks from rock legends.",
-    img: "https://i.scdn.co/image/ab67706c0000da84c27c4582b453d56a781b3d95",
-  },
-];
-
-const mockPlaylistCards = [
-  {
-    title: "Discover Weekly",
-    desc: "Your weekly mixtape of fresh music.",
-    img: "https://i.scdn.co/image/ab67616d00001e027d0a5073e7a115e2ca2d2ccd",
-  },
-  {
-    title: "Release Radar",
-    desc: "New tracks from artists you follow.",
-    img: "https://i.scdn.co/image/ab67616d00001e027e1c8b6011b5bfe6cd5d9a3d",
-  },
-  {
-    title: "Hot Country",
-    desc: "Nashville's current biggest hits.",
-    img: "https://i.scdn.co/image/ab67706c0000da843e4b2c59162f7870be3b9747",
-  },
-  {
-    title: "Hit Rewind",
-    desc: "Revisit the greatest chart toppers.",
-    img: "https://i.scdn.co/image/ab67616d00001e023e7cee1955e50b285cf4904d",
-  },
-  {
-    title: "Beast Mode",
-    desc: "Music to power your workout.",
-    img: "https://i.scdn.co/image/ab67706c0000da84df20e396f5eea012af190775",
-  },
-  {
-    title: "Song Exploder",
-    desc: "Tracks with fascinating stories.",
-    img: "https://i.scdn.co/image/ab67616d00001e02dc5d14c2b251f68c14492557",
-  },
-];
-
-const PlaylistCard = ({ title, desc, img }) => (
-  <div className="playlist-card" tabIndex={0}>
+// Playlist UI stubs: REMOVE all demo/placeholder names/images/texts.
+// Provide visually correct but EMPTY card rows (placeholder boxes only).
+const PlaylistCard = () => (
+  <div className="playlist-card empty" tabIndex={-1} aria-hidden="true">
     <div className="playlist-card__img-wrap">
-      <img src={img} alt={title} className="playlist-card__img" />
-      <PlayIconOverlay />
+      {/* No album art (if screenshot is blank) */}
     </div>
     <div className="playlist-card__text">
-      <div className="playlist-card__title">{title}</div>
-      <div className="playlist-card__desc">{desc}</div>
+      {/* No title and desc */}
     </div>
   </div>
 );
 
 const MainContent = () => (
   <main className="main-content">
+    {/* Only section headings/cards visible in screenshot are kept,
+        REMOVE all named playlists and hardcoded rows if not visible */}
     <section className="home-section">
       <h2 className="section-title">Focus</h2>
       <div className="card-row">
-        {mockFocusCards.map((card, idx) => (
-          <PlaylistCard key={idx} {...card} />
-        ))}
+        {/* If in screenshot: Show empty cards to match grid count */}
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
       </div>
     </section>
     <section className="home-section">
       <h2 className="section-title">Spotify Playlists</h2>
       <div className="card-row card-row--six">
-        {mockPlaylistCards.map((card, idx) => (
-          <PlaylistCard key={idx} {...card} />
-        ))}
+        {/* Six empty cards: */}
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
+        <PlaylistCard />
       </div>
     </section>
   </main>
