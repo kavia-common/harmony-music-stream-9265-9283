@@ -1,0 +1,4 @@
+{
+    "command": "npm run test",
+    "working_directory": "/home/kavia/workspace/code-generation/harmony-music-stream-9265-9283/spotify_clone_frontend"
+}
