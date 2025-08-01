@@ -124,16 +124,50 @@ const Sidebar = () => (
   </aside>
 );
 
-// Playlist UI stubs: REMOVE all demo/placeholder names/images/texts.
-// Provide visually correct but EMPTY card rows (placeholder boxes only).
-const PlaylistCard = () => (
-  <div className="playlist-card empty" tabIndex={-1} aria-hidden="true">
+/**
+ * Helper playlist/album artwork images from Unsplash (royalty-free).
+ * Each image fits the typical square and rounded corners seen in Spotify cards.
+ */
+const albumArtImages = [
+  // Focus section
+  "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80", // Headphones
+  "https://images.unsplash.com/photo-1453090927415-5f45085b65c0?auto=format&fit=crop&w=400&q=80", // Vinyl/platter
+  "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80", // Sunset headphones
+  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80", // Speaker/album
+  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", // Cassettes
+];
+
+const playlistImages = [
+  // Spotify Playlists (music themed)
+  "https://images.unsplash.com/photo-1468421870903-4df1664ac249?auto=format&fit=crop&w=400&q=80", // Guitar
+  "https://images.unsplash.com/photo-1487180144351-b8472da7d491?auto=format&fit=crop&w=400&q=80", // Colorful tapes
+  "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=400&q=80", // Headphones
+  "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80", // Speaker
+  "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80", // Player
+  "https://images.unsplash.com/photo-1453090927415-5f45085b65c0?auto=format&fit=crop&w=400&q=80", // Vinyl
+];
+
+// PUBLIC_INTERFACE
+const PlaylistCard = ({ imgUrl }) => (
+  <div className="playlist-card" tabIndex={-1} aria-hidden="true">
     <div className="playlist-card__img-wrap">
-      {/* No album art (if screenshot is blank) */}
+      <img
+        className="playlist-card__img"
+        src={imgUrl}
+        alt=""
+        draggable="false"
+        loading="lazy"
+        width="100%"
+        height="100%"
+        style={{
+          objectFit: "cover",
+          borderRadius: "var(--radius) var(--radius) 0 0",
+          display: "block",
+          background: "#262626"
+        }}
+      />
     </div>
-    <div className="playlist-card__text">
-      {/* No title and desc */}
-    </div>
+    <div className="playlist-card__text">{/* No title and desc */}</div>
   </div>
 );
 
@@ -144,24 +178,17 @@ const MainContent = () => (
     <section className="home-section">
       <h2 className="section-title">Focus</h2>
       <div className="card-row">
-        {/* If in screenshot: Show empty cards to match grid count */}
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
+        {albumArtImages.map((img, idx) => (
+          <PlaylistCard imgUrl={img} key={idx} />
+        ))}
       </div>
     </section>
     <section className="home-section">
       <h2 className="section-title">Spotify Playlists</h2>
       <div className="card-row card-row--six">
-        {/* Six empty cards: */}
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
+        {playlistImages.map((img, idx) => (
+          <PlaylistCard imgUrl={img} key={idx} />
+        ))}
       </div>
     </section>
   </main>
